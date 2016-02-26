@@ -1,0 +1,54 @@
+<div class="col-md-12">
+  <div class="group">
+  	<%= link_to("New Post", new_group_post_path(@group), class: "btn btn-warning pull-right") %>
+    <% if @group.editable_by?(current_user) %>
+      <%= link_to("Edit", edit_group_path(@group), class: "btn btn-primary pull-right")%>
+    <% end %>
+        <% if current_user.present? %><!-- 判斷有無登入 -->
+          <% if current_user.is_member_of?(@group) %>
+            <%= link_to("Quit Group", quit_group_path(@group), method: :post, class: "btn btn-danger") %>
+          <% else %>
+            <%= link_to("Join Group", join_group_path(@group), method: :post, class: "btn btn-info") %>
+          <% end %>
+        <% end %>
+ 
+
+  </div>
+  <h2><%= @group.title %></h2>
+  <p><%= @group.description %></p>
+   <p><%= group_path(@group) %></p>
+
+   <table class="table">
+   <thead>
+     <tr>
+       <th>文章</th>
+       <th colspan="2"></th>
+     </tr>
+   </thead>
+   <tbody>
+     <% @posts.each do |post| %>
+       <tr>
+        
+         <td><%= render_content(post.content) %></td>
+         <!-- <td><%= edit_group_post_path(post.group , post) %></td>
+         <td><%= group_post_path(post.group_id, post) %></td> -->
+
+         <td>
+          <!-- 不懂edit_group_post_path跟group_post_path的兩個參數意義
+          跟為什麼不用post.group_id要用post.group，而且兩個的值是一樣
+        -->
+        <% if post.editable_by?(current_user) %>
+                  <%= link_to("Edit", edit_group_post_path(post.group, post),
+                       class: "btn btn-default btn-xs")%>
+           <%= link_to("Delete", group_post_path(post.group, post),
+                       class: "btn btn-default btn-xs ", method: :delete, 
+                       data: { confirm: "Are you sure?" } )%>
+        <% end %>
+
+
+         </td>
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
+</div>
