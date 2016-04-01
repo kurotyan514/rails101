@@ -45,7 +45,7 @@ group :development, :test do
   gem "capistrano", "~> 3.4"
   gem "capistrano-rvm"
   gem "capistrano-rails"
-  gem "net-ssh", "~> 2.7.0"
+  #gem "net-ssh", "~> 2.7.0"
 end
 
 group :development do
