@@ -9,7 +9,6 @@ gem 'quiet_assets'
 gem 'wannabe_bool'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-gem 'uglifier'
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets
@@ -43,6 +42,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'sqlite3'
+  gem "capistrano", "~> 3.4"
+  gem "capistrano-rvm"
+  gem "capistrano-rails"
+  gem "net-ssh", "~> 2.7.0"
 end
 
 group :development do
