@@ -31,30 +31,36 @@ class GroupsController < ApplicationController
 			else
 				redirect_to groups_path , notice: "修改討論板成功"
 			end
-			 
+
 		else
 			render :edit
 		end
 	end
 
 	def destroy
+
+		@group = current_user.groups.find(params[:id]);
+		binding.pry
+		# @group.group_users.delete_all
+    @group.destroy
 		# @group = Group.find(params[:id])
 		# @group = current_user.groups.find(params[:id])
-		@group.destroy
+
+		# @group.destroy
 		if $is_from_account
 				redirect_to account_groups_path , notice: "文章已刪除"
 			else
 				redirect_to groups_path(@group) , alert: "文章已刪除"
 		end
-		
+
 	end
 
-	def create 
-		
+	def create
+
 		# @group = Group.create(group_params);
-		
+
 		@group = current_user.groups.create(group_params)
-		
+
 		if @group.save
 			current_user.join!(@group)
 			redirect_to groups_path
@@ -98,7 +104,7 @@ class GroupsController < ApplicationController
 	end
 
 	def group_params
-		
+
 		params.require(:group).permit(:title,:description)
 	end
 	def check_is_from_account
