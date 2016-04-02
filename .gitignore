@@ -17,3 +17,6 @@
 /tmp
 /config/database.yml
 /config/secrets.yml
+/config/deploy/production.rb
+/config/deploy/staging.rb
+/config/deploy.rb
